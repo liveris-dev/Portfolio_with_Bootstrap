@@ -22,70 +22,24 @@
 </div>
 <div class="container px-4 py-5" id="icon-grid"><h2 class="pb-2 border-bottom yanone-kaffeesatz-libe">My Projects</h2>
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 py-5">
-        <div class="col d-flex align-items-start">
-<!--   added an svg from bootstrap icons and copied the classes from the previous-svg-code so the new one fits in.-->
-            <!--            <svg class="bi text-body-secondary flex-shrink-0 me-3" width="1.75em" height="1.75em" aria-hidden="true">-->
-            <!--                <use xlink:href="#bootstrap"></use>-->
-            <!--            </svg>-->
-<!--   the new svg-->
-            <svg xmlns="http://www.w3.org/2000/svg" width="1.75em" height="1.75em" fill="currentColor"
-                 class="bi bi-joystick text-body-secondary flex-shrink-0 me-3" viewBox="0 0 16 16">
-                <path d="M10 2a2 2 0 0 1-1.5 1.937v5.087c.863.083 1.5.377 1.5.726 0 .414-.895.75-2 .75s-2-.336-2-.75c0-.35.637-.643 1.5-.726V3.937A2 2 0 1 1 10 2"/>
-                <path d="M0 9.665v1.717a1 1 0 0 0 .553.894l6.553 3.277a2 2 0 0 0 1.788 0l6.553-3.277a1 1 0 0 0 .553-.894V9.665c0-.1-.06-.19-.152-.23L9.5 6.715v.993l5.227 2.178a.125.125 0 0 1 .001.23l-5.94 2.546a2 2 0 0 1-1.576 0l-5.94-2.546a.125.125 0 0 1 .001-.23L6.5 7.708l-.013-.988L.152 9.435a.25.25 0 0 0-.152.23"/>
-            </svg>
-            <div><a href="#"><h3 class="fw-bold mb-0 fs-4 text-body-emphasis">Featured title</h3></a>
-                <p>Paragraph of text beneath the heading to explain the heading.</p></div>
-        </div>
-        <div class="col d-flex align-items-start">
-            <svg class="bi text-body-secondary flex-shrink-0 me-3" width="1.75em" height="1.75em" aria-hidden="true">
-                <use xlink:href="#cpu-fill"></use>
-            </svg>
-            <div><h3 class="fw-bold mb-0 fs-4 text-body-emphasis">Featured title</h3>
-                <p>Paragraph of text beneath the heading to explain the heading.</p></div>
-        </div>
-        <div class="col d-flex align-items-start">
-            <svg class="bi text-body-secondary flex-shrink-0 me-3" width="1.75em" height="1.75em" aria-hidden="true">
-                <use xlink:href="#calendar3"></use>
-            </svg>
-            <div><h3 class="fw-bold mb-0 fs-4 text-body-emphasis">Featured title</h3>
-                <p>Paragraph of text beneath the heading to explain the heading.</p></div>
-        </div>
-        <div class="col d-flex align-items-start">
-            <svg class="bi text-body-secondary flex-shrink-0 me-3" width="1.75em" height="1.75em" aria-hidden="true">
-                <use xlink:href="#home"></use>
-            </svg>
-            <div><h3 class="fw-bold mb-0 fs-4 text-body-emphasis">Featured title</h3>
-                <p>Paragraph of text beneath the heading to explain the heading.</p></div>
-        </div>
-        <div class="col d-flex align-items-start">
-            <svg class="bi text-body-secondary flex-shrink-0 me-3" width="1.75em" height="1.75em" aria-hidden="true">
-                <use xlink:href="#speedometer2"></use>
-            </svg>
-            <div><h3 class="fw-bold mb-0 fs-4 text-body-emphasis">Featured title</h3>
-                <p>Paragraph of text beneath the heading to explain the heading.</p></div>
-        </div>
-        <div class="col d-flex align-items-start">
-            <svg class="bi text-body-secondary flex-shrink-0 me-3" width="1.75em" height="1.75em" aria-hidden="true">
-                <use xlink:href="#toggles2"></use>
-            </svg>
-            <div><h3 class="fw-bold mb-0 fs-4 text-body-emphasis">Featured title</h3>
-                <p>Paragraph of text beneath the heading to explain the heading.</p></div>
-        </div>
-        <div class="col d-flex align-items-start">
-            <svg class="bi text-body-secondary flex-shrink-0 me-3" width="1.75em" height="1.75em" aria-hidden="true">
-                <use xlink:href="#geo-fill"></use>
-            </svg>
-            <div><h3 class="fw-bold mb-0 fs-4 text-body-emphasis">Featured title</h3>
-                <p>Paragraph of text beneath the heading to explain the heading.</p></div>
-        </div>
-        <div class="col d-flex align-items-start">
-            <svg class="bi text-body-secondary flex-shrink-0 me-3" width="1.75em" height="1.75em" aria-hidden="true">
-                <use xlink:href="#tools"></use>
-            </svg>
-            <div><h3 class="fw-bold mb-0 fs-4 text-body-emphasis">Featured title</h3>
-                <p>Paragraph of text beneath the heading to explain the heading.</p></div>
-        </div>
+        {% for project in all_projects %}
+            <div class="col d-flex align-items-start">
+<!--   a    dded an svg from bootstrap icons and copied the classes from the previous-svg-code so the new one fits in.-->
+                <!--            <svg class="bi text-body-secondary flex-shrink-0 me-3" width="1.75em" height="1.75em" aria-hidden="true">-->
+                <!--                <use xlink:href="#bootstrap"></use>-->
+                <!--            </svg>-->
+<!--   t    he new svg-->
+                <svg xmlns="http://www.w3.org/2000/svg" width="1.75em" height="1.75em" fill="currentColor"
+                     class="bi bi-joystick text-body-secondary flex-shrink-0 me-3" viewBox="0 0 16 16">
+                    <path d="M10 2a2 2 0 0 1-1.5 1.937v5.087c.863.083 1.5.377 1.5.726 0 .414-.895.75-2 .75s-2-.336-2-.75c0-.35.637-.643 1.5-.726V3.937A2 2 0 1 1 10 2"/>
+                    <path d="M0 9.665v1.717a1 1 0 0 0 .553.894l6.553 3.277a2 2 0 0 0 1.788 0l6.553-3.277a1 1 0 0 0 .553-.894V9.665c0-.1-.06-.19-.152-.23L9.5 6.715v.993l5.227 2.178a.125.125 0 0 1 .001.23l-5.94 2.546a2 2 0 0 1-1.576 0l-5.94-2.546a.125.125 0 0 1 .001-.23L6.5 7.708l-.013-.988L.152 9.435a.25.25 0 0 0-.152.23"/>
+                </svg>
+                <div><a href="#"><h3 class="fw-bold mb-0 fs-4 text-body-emphasis">{{ project.title }}</h3></a>
+                    <p>{{ project.subtitle }}</p></div>
+            </div>
+        {% endfor %}
+
     </div>
-    <button class="btn btn-link rounded-pill px-3" style="float:right;" type="button">Show All</button>
+    <a class="btn btn-link rounded-pill px-3" style="float:right;" type="button" href="{{ url_for('show_all_projects') }}">Show All</a>
 </div>
 {% endblock %}
