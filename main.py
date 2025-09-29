@@ -6,7 +6,7 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 from sqlalchemy import Integer, String, Text
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField
+from wtforms import StringField, SubmitField, SelectField
 from wtforms.validators import DataRequired, URL
 from flask_ckeditor import CKEditor, CKEditorField
 from flask_bootstrap import Bootstrap5
@@ -32,6 +32,7 @@ class Project(db.Model):
     title: Mapped[str] = mapped_column(String(250), unique=True, nullable=False)
     subtitle: Mapped[str] = mapped_column(String(250), nullable=False)
     body: Mapped[str] = mapped_column(Text, nullable=False)
+    type: Mapped[str] = mapped_column(String(250), nullable=False)
     github: Mapped[str] = mapped_column(String(250), nullable=False)
     img_url: Mapped[str] = mapped_column(String(250), nullable=False)
 
@@ -44,6 +45,7 @@ class ProjectForm(FlaskForm):
     title=StringField(label='Project Title', validators=[DataRequired()])
     subtitle=StringField(label='Project Subtitle', validators=[DataRequired()])
     body=CKEditorField(label='Project Body', validators=[DataRequired()])
+    category=SelectField(label='Project Category', choices=['App','Game','Website'])
     project_url=StringField(label='Github Link', validators=[DataRequired(), URL()])
     img_url=StringField(label='Image URL', validators=[DataRequired(), URL()])
     submit=SubmitField(label='Submit Project')
@@ -68,6 +70,7 @@ def new_project():
             title=form.title.data,
             subtitle=form.subtitle.data,
             body=form.body.data,
+            type=form.category.data,
             github=form.project_url.data,
             img_url=form.img_url.data
         )
