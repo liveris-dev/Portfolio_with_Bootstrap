@@ -93,6 +93,14 @@ def show_all_projects():
 def show_project(project_id):
     requested_project = db.get_or_404(Project, project_id)
     return render_template("project.html", project=requested_project)
+
+@app.route("/terminate/<project_id>")
+def terminate_project(project_id):
+    requested_project = db.get_or_404(Project, project_id)
+    db.session.delete(requested_project)
+    db.session.commit()
+    return redirect(url_for('show_all_projects'))
+
 @app.route("/contact", methods=["GET","POST"])
 def contact():
     if request.method == "POST":
