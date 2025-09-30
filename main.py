@@ -1,9 +1,10 @@
+from enum import unique
+
 from flask import Flask, render_template, redirect, url_for, request
-import requests
 import smtplib
 import os
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
+from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
 from sqlalchemy import Integer, String, Text
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, SelectField
@@ -11,7 +12,7 @@ from wtforms.validators import DataRequired, URL
 from flask_ckeditor import CKEditor, CKEditorField
 from flask_bootstrap import Bootstrap5
 
-my_email = "tapiagasantonakis@gmail.com"
+my_email = os.environ.get('EMAIL_ADDRESS')
 my_password = os.environ.get('EMAIL_KEY')
 
 app = Flask(__name__)
@@ -22,13 +23,19 @@ ckeditor = CKEditor(app)
 #CREATE DATABASE
 class Base(DeclarativeBase):
     pass
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///projects.db'
+#ADD ENV VARIABLE TO DB URI TO USE WITH POSTGRESQL
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DB_URI', 'sqlite:///projects.db')
 db = SQLAlchemy(model_class=Base)
 db.init_app(app)
 
-#CONFIGURE TABLE
+#CONFIGURE TABLES
 class Project(db.Model):
+    __tablename__= "projects"
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    # Create a foreign key, "users.id" the users refers to the tablename of User.
+    author_id: Mapped[int] = mapped_column(Integer, db.ForeignKey("users.id"))
+    # Create reference to the User object. The "projects" refers to the projects property in the User class.
+    author = relationship("User", back_populates="projects")
     title: Mapped[str] = mapped_column(String(250), unique=True, nullable=False)
     subtitle: Mapped[str] = mapped_column(String(250), nullable=False)
     body: Mapped[str] = mapped_column(Text, nullable=False)
@@ -36,6 +43,14 @@ class Project(db.Model):
     github: Mapped[str] = mapped_column(String(250), nullable=False)
     img_url: Mapped[str] = mapped_column(String(250), nullable=False)
 
+class User(db.Model):
+    __tablename__ = "users"
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    email: Mapped[str] = mapped_column(String(250), unique=True, nullable=False)
+    password: Mapped[str] = mapped_column(String(250), nullable=False)
+    name: Mapped[str] = mapped_column(String(250), nullable=False)
+    # This will act as a list of Project objects attached to each User.The "author" refers to the author property of th Project class.
+    projects = relationship("Project", back_populates="author")
 
 with app.app_context():
     db.create_all()
@@ -50,7 +65,7 @@ class ProjectForm(FlaskForm):
     img_url=StringField(label='Image URL', validators=[DataRequired(), URL()])
     submit=SubmitField(label='Submit Project')
 
-
+#CREATE SEND EMAIL FUNCTION FOR CONTACT
 def send_email(name, email, phone, message):
     email_message = f"Subject:Blogspot contact message!\n\nName:{name}\nEmail:{email}\nPhone number:{phone}\nMessage:{message}"
     with smtplib.SMTP("smtp.gmail.com") as connection:
@@ -62,6 +77,7 @@ def send_email(name, email, phone, message):
             msg=email_message
         )
 
+#ADD A NEW PROJECT
 @app.route("/new_project", methods=["GET","POST"])
 def new_project():
     form = ProjectForm()
@@ -78,6 +94,8 @@ def new_project():
         db.session.commit()
         return redirect(url_for('home'))
     return render_template("add-project.html", form=form)
+
+
 
 @app.route("/")
 def home():
@@ -113,6 +131,7 @@ def contact():
 @app.route("/about")
 def about():
     return render_template("about.html")
+
 
 if __name__ == "__main__":
     app.run(debug=True)
