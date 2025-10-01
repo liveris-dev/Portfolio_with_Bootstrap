@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% from 'bootstrap5/form.html' import render_form %}
+{% block content %}
+    <h1 class="sulphur-point-bold">Sign In</h1>
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+
+    {% for category,message in messages %}
+      <div class="{{category}}">{{ message }}</div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+    {{ render_form(form, novalidate=True, button_map={"submit": "light"}) }}
+{% endblock %}

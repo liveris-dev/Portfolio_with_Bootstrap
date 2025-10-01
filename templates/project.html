@@ -8,8 +8,9 @@
         <p class="lead">{{ project.body|safe }}</p>
         <div class="d-grid gap-2 d-md-flex justify-content-md-start">
             <a type="button" class="btn btn-light btn-lg px-4 me-md-2" href="{{ project.github }}">Show on Github</a>
+            {% if current_user.id == 1 %}
             <a type="button" class="btn btn-danger btn-lg px-4 me-md-2" href="{{ url_for('terminate_project', project_id = project.id) }}">Delete</a>
-
+            {% endif %}
         </div>
     </div>
 </div>
