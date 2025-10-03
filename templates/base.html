@@ -49,19 +49,14 @@
 <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom sulphur-point-regular"
         style="background-color:#C9EEE6">
     <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto ms-3 link-body-emphasis text-decoration-none">
-        <!--    <svg class="bi me-2" width="40" height="32" aria-hidden="true">-->
-        <!--        <use xlink:href="#bootstrap"></use>-->
-        <!--    </svg>-->
         <span class="fs-4">&lt;/&gt; Liverios
                     Papagiannidis </span> </a>
     <ul class="nav nav-pills sulphur-point-bold">
-        <!--        <li class="nav-item"><a href="#" class="nav-link active" aria-current="page">Home</a></li>-->
         {% if current_user.is_authenticated %}
-        <li class="nav-item"><a href="{{ url_for('logout') }}" class="nav-link link-secondary">Logout</a></li>
+            <li class="nav-item"><a href="{{ url_for('logout') }}" class="nav-link link-secondary">Logout</a></li>
         {% endif %}
         <li class="nav-item"><a href="{{ url_for('home') }}" class="nav-link link-secondary">Home</a></li>
-        <li class="nav-item"><a href="{{ url_for('show_all_projects') }}" class="nav-link link-secondary">Projects</a>
-        </li>
+        <li class="nav-item"><a href="{{ url_for('show_all_projects') }}" class="nav-link link-secondary">Projects</a></li>
         <li class="nav-item"><a href="{{ url_for('about') }}" class="nav-link link-secondary">About</a></li>
         <li class="nav-item"><a href="{{ url_for('contact') }}" class="nav-link link-secondary">Contact</a></li>
     </ul>

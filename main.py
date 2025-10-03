@@ -150,7 +150,6 @@ def logout():
     logout_user()
     return redirect(url_for("home"))
 
-
 @app.route("/")
 def home():
     projects = db.session.execute(db.select(Project)).scalars().all()
@@ -166,7 +165,6 @@ def show_project(project_id):
     requested_project = db.get_or_404(Project, project_id)
     return render_template("project.html", project=requested_project)
 
-#ADD A NEW PROJECT
 @app.route("/new_project", methods=["GET","POST"])
 @admin_only
 def new_project():

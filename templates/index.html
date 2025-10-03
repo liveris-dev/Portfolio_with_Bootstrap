@@ -6,8 +6,8 @@
         <div class="col-12 col-sm-12 col-lg-6"><img src="static/assets/images/back_dev.jpg"
                                                    class="d-block mx-auto img-fluid"
                                                    alt="Bootstrap Themes" width="700" height="500" loading="lazy"></div>
-        <div class="col-lg-6"><h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3 sulphur-point-regular">I am
-            Liverios.</h1>
+        <div class="col-lg-6">
+            <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3 sulphur-point-regular">I am Liverios.</h1>
             <p class="lead sulphur-point-regulare">I’m a full-stack developer passionate about building clean,
                 efficient, and user-friendly web
                 applications. I specialize in Python, Flask, and modern JavaScript frameworks, and I enjoy turning ideas
@@ -41,7 +41,6 @@
                 <p>{{ project.subtitle }}</p></div>
         </div>
         {% endfor %}
-
     </div>
     <a class="btn btn-light rounded-pill px-3 sulphur-point-regular" style="float:right;" type="button"
        href="{{ url_for('show_all_projects') }}">Show All</a>
